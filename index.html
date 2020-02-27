@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-02-27 22:19:11
- * @LastEditTime: 2020-02-27 22:57:22
+ * @LastEditTime: 2020-02-27 23:35:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \专升本倒计时\index.html
@@ -20,12 +20,11 @@
             padding: 0;
         }
 
-        html,
-        body {
+        html,body {
             background-color: black;
         }
 
-        .wrapper {
+        .wrapper{
             color: #fff;
             margin: 80px auto;
             width: 400px;
@@ -46,6 +45,16 @@
         .wrapper img{
             width: 100%;
         }
+        .wrapper .error{
+            margin-top: 10px;
+        }
+        .wrapper .error .DAY{
+            color: aquamarine;
+        }
+        .wrapper .name{
+            text-align: right;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -58,11 +67,16 @@
             <span class="hour">hour</span>
             <span class="minute">minute</span>
             <span class="second">second</span>
+            <p class="error"> 
+                <span class="DAY"></span>后你会发现一个不同的自己
+            </p>
         </div>
         <img src="http://www.001zsb.com/uploads/allimg/190325/1043394344-0.jpg" alt="">
+        <p class="name">开封大学旅游学院杨历朋设计</p>
     </div>
     <script>
         var day = document.getElementsByClassName("day")[0]
+        var dayT = document.getElementsByClassName("DAY")[0]
         var hour = document.getElementsByClassName("hour")[0]
         var minute = document.getElementsByClassName("minute")[0]
         var second = document.getElementsByClassName("second")[0]
@@ -75,9 +89,13 @@
             var minutet = parseInt(restSec / (60 * 1000) % 60);
             var secondt = parseInt(restSec / 1000 % 60);
             day.innerText = dayt + "天";
+            dayT.innerText = dayt + "天";
             hour.innerText = hourt + "小时";
             minute.innerText = minutet + "分钟";
             second.innerText = secondt + "秒";
+        }
+        window.onload = function(){
+            restTime()
         }
         setInterval(restTime, 1000)
     </script>
