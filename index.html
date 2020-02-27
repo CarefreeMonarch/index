@@ -1,92 +1,85 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-02-27 22:19:11
+ * @LastEditTime: 2020-02-27 22:57:22
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \专升本倒计时\index.html
+ -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>专升本倒计时</title>
     <style>
-        html,body {
-            width:100%;
-            height:100%;
-            background: #000;
-            overflow: hidden;
+        * {
+            margin: 0;
+            padding: 0;
         }
-        canvas {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -250px;
-            margin-left: -250px;
+
+        html,
+        body {
+            background-color: black;
+        }
+
+        .wrapper {
+            color: #fff;
+            margin: 80px auto;
+            width: 400px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .wrapper h1 {
+            font-size: 20px;
+            color:red;
+            text-align: center;
+            margin: 20px;
+        }
+        .wrapper .time{
+            margin: 20px;
+            text-align: center;
+        }
+        .wrapper img{
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <div class="wrapper">
+        <h1>河南专升本倒计时</h1>
+        <div class="time">
+            <span>剩余</span>
+            <span class="day">day</span>
+            <span class="hour">hour</span>
+            <span class="minute">minute</span>
+            <span class="second">second</span>
+        </div>
+        <img src="http://www.001zsb.com/uploads/allimg/190325/1043394344-0.jpg" alt="">
+    </div>
     <script>
-        var myCanvas = document.getElementById('myCanvas');
-        var ctx = myCanvas.getContext('2d');
-        // 定义基本颜色值  画笔大小 阴影颜色 阴影半径
-        ctx.strokeStyle = '#00ffff';
-        ctx.lineWidth = 17;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = '#00ffff';
-        function renderTime() {
-            var date = new Date();
-            // 年月日
-            var today = date.toDateString();
-            // 当前时间
-            var time = date.toLocaleDateString();
-            // 时分秒
-            var h = date.getHours();
-            var m = date.getMinutes();
-            var s = date.getSeconds();
-            var ms = date.getMilliseconds();
-            var smoothsec = s + (ms / 1000);
-            var smoothmin = m + (smoothsec / 60);
-            // 背景
-            // createRadialGradient() 方法创建放射状/圆形渐变对象
-            gradient = ctx.createRadialGradient(250, 250, 5, 250, 250, 300);
-            // addColorStop() 方法规定渐变对象中的颜色和位置 0 ~ 1
-            gradient.addColorStop(0, "#03303a");
-            gradient.addColorStop(1, "#000");
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 500, 500);
-            // 小时
-            ctx.beginPath();
-            // 每一个格代表 360 /12 = 30
-            ctx.arc(250, 250, 200, degToRad(270), degToRad((h * 30) - 90));
-            ctx.stroke();
-            // 分钟
-            ctx.beginPath();
-            // 每一个格代表 360 / 59 = 6            
-            ctx.arc(250, 250, 170, degToRad(270), degToRad((smoothmin * 6) - 90));
-            ctx.stroke();
-            //  秒
-            ctx.beginPath();
-            // 每一个格代表 360 / 60 = 6                        
-            ctx.arc(250, 250, 140, degToRad(270), degToRad((smoothsec * 6) - 90));
-            ctx.stroke();
-            //Date
-            ctx.font = "25px Helvetica";
-            ctx.fillStyle = 'rgba(0, 255, 255, 1)'
-            ctx.fillText(today, 175, 250);
-            //Time
-            ctx.font = "25px Helvetica Bold";
-            ctx.fillStyle = 'rgba(0, 255, 255, 1)';
-            var h = ('0' + h).slice(-2);
-            var m = ('0' + m).slice(-2);
-            var s = ('0' + s).slice(-2);
-            ctx.fillText(h + ':' + m + ':' + s + ':' + ms, 175, 280);
+        var day = document.getElementsByClassName("day")[0]
+        var hour = document.getElementsByClassName("hour")[0]
+        var minute = document.getElementsByClassName("minute")[0]
+        var second = document.getElementsByClassName("second")[0]
+        function restTime() {
+            var setTime = new Date("2020/6/7 09:00:00");
+            var newTime = new Date();
+            var restSec = setTime.getTime() - newTime.getTime();
+            var dayt = parseInt(restSec / (60 * 60 * 24 * 1000));
+            var hourt = parseInt(restSec / (60 * 60 * 1000) % 24);
+            var minutet = parseInt(restSec / (60 * 1000) % 60);
+            var secondt = parseInt(restSec / 1000 % 60);
+            day.innerText = dayt + "天";
+            hour.innerText = hourt + "小时";
+            minute.innerText = minutet + "分钟";
+            second.innerText = secondt + "秒";
         }
-        setInterval(renderTime, 40);
-        // 角度转弧度  弧度 = 角度 * Math.PI / 180
-        function degToRad(degree) {
-            var factor = Math.PI / 180;
-            return degree * factor;
-        }
+        setInterval(restTime, 1000)
     </script>
 </body>
 
