@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-02-27 22:19:11
- * @LastEditTime: 2020-02-27 23:35:07
+ * @LastEditTime: 2020-02-27 23:54:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \专升本倒计时\index.html
@@ -88,11 +88,24 @@
             var hourt = parseInt(restSec / (60 * 60 * 1000) % 24);
             var minutet = parseInt(restSec / (60 * 1000) % 60);
             var secondt = parseInt(restSec / 1000 % 60);
+            function gettimer(){
+                if(hourt < 10){
+                    hourt =  "0" + hourt
+                }
+                if(minutet < 10){
+                    minutet =  "0" + minutet
+                }
+                if(secondt < 10){
+                    secondt =  "0" + secondt
+                }
+            }
+            gettimer()
             day.innerText = dayt + "天";
             dayT.innerText = dayt + "天";
             hour.innerText = hourt + "小时";
             minute.innerText = minutet + "分钟";
             second.innerText = secondt + "秒";
+            
         }
         window.onload = function(){
             restTime()
