@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-02-27 22:19:11
- * @LastEditTime: 2020-09-01 23:23:28
+ * @LastEditTime: 2020-09-18 23:43:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \专升本倒计时\index.html
@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="referrer" content="no-referrer">
-    <meta  name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>飞鹏考研服务中心</title>
     <style>
         * {
@@ -20,7 +20,7 @@
             padding: 0;
         }
 
-        .wrapper{
+        .wrapper {
             color: #000;
             font-size: 20px;
             text-align: center;
@@ -28,32 +28,71 @@
 
         .wrapper h1 {
             font-size: 20px;
-            color:red;
+            color: red;
             text-align: center;
             margin: 20px;
         }
-        .wrapper .time{
+
+        .wrapper .time {
             margin: 10px;
             text-align: center;
         }
-        .wrapper img{
+
+        .wrapper img {
             width: 100%;
         }
-        .wrapper .error{
+
+        .wrapper .error {
             font-size: 20px;
             font-weight: bold;
-            color:#000;
+            color: #000;
             margin-top: 10px;
         }
-        .wrapper .error .DAY{
+
+        .wrapper .error .DAY {
             color: aquamarine;
         }
-        .wrapper .name{
+
+        .wrapper .name {
             font-size: 20px;
             margin-top: 10px;
         }
-        #ad{
-            word-wrap:break-word：
+
+        #ad {
+            word-wrap: break-word：
+        }
+
+        .container {
+            width: 200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .container div {
+            margin-top: 10px;
+        }
+
+        .container .btn {
+            margin: 0 auto;
+            width: 50px;
+            height: 30px;
+            text-align: center;
+        }
+
+        .container input {
+            width: 200px;
+            height: 30px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .answer {
+            margin-left: 20px;
+            color: #f50;
+            text-align: left;
+            font-size: 20px;
+            font-weight: bold;
+            word-break: break-all;
         }
     </style>
 </head>
@@ -67,7 +106,7 @@
             <span class="hour">hour</span>
             <span class="minute">minute</span>
             <span class="second">second</span>
-            <p class="error"> 
+            <p class="error">
                 <span class="DAY"></span>后你会发现一个不同的自己
             </p>
         </div>
@@ -75,12 +114,25 @@
             <span style="color:#f40;font-weight: bolder;">杨历朋</span>设计
         </p>
     </div>
+    <div class="container">
+        <div id="inputvalue">
+            <input type="text" placeholder="请输入值" class="inputvalue">
+        </div>
+        <div id="power">
+            <input type="text" placeholder="请输入幂" class="power">
+        </div>
+        <br>
+        <br>
+        <button class="btn">确定</button>
+    </div>
+    <div class="answer"></div>
     <script>
         var day = document.getElementsByClassName("day")[0]
         var dayT = document.getElementsByClassName("DAY")[0]
         var hour = document.getElementsByClassName("hour")[0]
         var minute = document.getElementsByClassName("minute")[0]
         var second = document.getElementsByClassName("second")[0]
+
         function restTime() {
             var setTime = new Date("2021/12/18 09:00:00");
             var newTime = new Date();
@@ -89,15 +141,16 @@
             var hourt = parseInt(restSec / (60 * 60 * 1000) % 24);
             var minutet = parseInt(restSec / (60 * 1000) % 60);
             var secondt = parseInt(restSec / 1000 % 60);
-            function gettimer(){
-                if(hourt < 10){
-                    hourt =  "0" + hourt
+
+            function gettimer() {
+                if (hourt < 10) {
+                    hourt = "0" + hourt
                 }
-                if(minutet < 10){
-                    minutet =  "0" + minutet
+                if (minutet < 10) {
+                    minutet = "0" + minutet
                 }
-                if(secondt < 10){
-                    secondt =  "0" + secondt
+                if (secondt < 10) {
+                    secondt = "0" + secondt
                 }
             }
             gettimer()
@@ -106,12 +159,36 @@
             hour.innerText = hourt + "小时";
             minute.innerText = minutet + "分钟";
             second.innerText = secondt + "秒";
-            
+
         }
-        window.onload = function(){
+        window.onload = function () {
             restTime()
         }
         setInterval(restTime, 1000)
+        var btn = document.getElementsByClassName("btn")[0];
+        var answer = document.getElementsByClassName("answer")[0];
+
+        function getvalue() {
+            var inputvalue = document.getElementsByClassName("inputvalue")[0].value;
+            var power = document.getElementsByClassName("power")[0].value;
+            inputvalue = parseInt(inputvalue);
+            power = parseInt(power);
+            return {
+                inputvalue: inputvalue,
+                power: power
+            }
+        }
+        btn.onclick = function () {
+            var inputvalue = getvalue().inputvalue;
+            var power = getvalue().power;
+            var temp = inputvalue;
+            for (var i = 1; i < power; i++) {
+                inputvalue *= temp;
+            }
+            var num = new Number(inputvalue);
+            inputvalue = num.toLocaleString();
+            answer.innerHTML = "该数的幂为" +"<br>" + inputvalue;
+        }
     </script>
 </body>
 
