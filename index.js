@@ -1,8 +1,19 @@
+/*
+ * @Author: your name
+ * @Date: 2020-11-04 13:07:29
+ * @LastEditTime: 2020-11-04 17:48:27
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edito
+ * @FilePath: \blog\index.js
+ */
 var day = document.getElementsByClassName("day")[0]
 var hour = document.getElementsByClassName("hour")[0]
 var minute = document.getElementsByClassName("minute")[0]
 var second = document.getElementsByClassName("second")[0]
-
+var audio = document.getElementsByClassName("play")[0]
+window.onclick=function(){
+    audio.play();
+}
 function restTime() {
     var setTime = new Date("2021/12/18 09:00:00");
     var newTime = new Date();
