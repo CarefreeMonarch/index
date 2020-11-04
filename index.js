@@ -1,100 +1,36 @@
-/*
- * @Author: your name
- * @Date: 2020-10-21 17:04:23
- * @LastEditTime: 2020-10-21 23:44:00
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \practice练习\index.js
- */
+var day = document.getElementsByClassName("day")[0]
+var hour = document.getElementsByClassName("hour")[0]
+var minute = document.getElementsByClassName("minute")[0]
+var second = document.getElementsByClassName("second")[0]
 
-(function () {
-    var divshow = document.getElementById("show");
-    var str = '';
-    var frist = document.getElementsByTagName('table')[0];
-    var double = document.getElementsByTagName('table')[1];
-    var first_week = document.getElementsByTagName('button')[0];
-    var double_week = document.getElementsByTagName('button')[1];
+function restTime() {
+    var setTime = new Date("2021/12/18 09:00:00");
+    var newTime = new Date();
+    var restSec = setTime.getTime() - newTime.getTime();
+    var dayt = parseInt(restSec / (60 * 60 * 24 * 1000));
+    var hourt = parseInt(restSec / (60 * 60 * 1000) % 24);
+    var minutet = parseInt(restSec / (60 * 1000) % 60);
+    var secondt = parseInt(restSec / 1000 % 60);
 
-    // 点击函数
-    function Meclick() {
-        first_week.onclick = function () {
-            oneWeek();
+    function gettimer() {
+        if (hourt < 10) {
+            hourt = "0" + hourt
         }
-        double_week.onclick = function () {
-            twoWeek();
+        if (minutet < 10) {
+            minutet = "0" + minutet
         }
-    }
-    //时间函数
-    function restTime() {
-        var setTime = new Date("2020/9/7 00:00:00");
-        var newTime = new Date();
-        var restSec = newTime.getTime() - setTime.getTime();
-        var dayt = parseInt(restSec / (60 * 60 * 24 * 1000));
-        return dayt
-    }
-    // 执行函数
-    function start() {
-        var dayt = restTime();
-        if (Math.ceil(dayt / 7) % 2 == 1) {
-            oneWeek()
-        } else {
-            twoWeek()
+        if (secondt < 10) {
+            secondt = "0" + secondt
         }
     }
-    start()
-    // 单双周函数
-    function oneWeek() {
-        double.style.display = "none";
-        frist.style.display = "table";
-        double_week.style.background = "#808080";
-        first_week.style.background = "#f40";
-    }
-    function twoWeek() {
-        double.style.display = "table";
-        frist.style.display = "none";
-        double_week.style.background = "#f40";
-        first_week.style.background = "#808080";
-    }
-    Meclick()
-    function localTime() {
-        function FormatDate(strTime) {
-            var date = new Date(strTime);
-            return date.getHours() < 10 ? "0" + date.getHours() : date.getHours() + ":" + date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-        }
-        var today = new Date();
-        var today_time = FormatDate(today);
-        if (today_time >= '08:00' && today_time <= '08:45') {
-            str = "第一节课"
-        }
-        if (today_time >= '08:55' && today_time <= '09:40') {
-            str = "第二节课"
-        }
-        if (today_time >= '10:00' && today_time <= '10:45') {
-            str = "第三节课"
-        }
-        if (today_time >= '10:55' && today_time <= '11:40') {
-            str = "第四节课"
-        }
-        if (today_time >= '13:00' && today_time <= '13:45') {
-            str = "第五节课"
-        }
-        if (today_time >= '13:55' && today_time <= '14:40') {
-            str = "第六节课"
-        }
-        if (today_time >= '14:50' && today_time <= '15:35') {
-            str = "第七节课"
-        }
-        if (today_time >= '15:45' && today_time <= '16:30') {
-            str = "第八节课"
-        }
-        if (today_time >= '19:00' && today_time <= '19:50') {
-            str = "第九节课"
-        } if (today_time >= '20:00' && today_time <= '20:50') {
-            str = "第十节课"
-        } else {
-            str = "现在已经放学或下课"
-        }
-        divshow.innerText = str
-    }
-    localTime()
-})()
+    gettimer()
+    day.innerText = dayt + "天";
+    hour.innerText = hourt + "小时";
+    minute.innerText = minutet + "分钟";
+    second.innerText = secondt + "秒";
+
+}
+window.onload = function () {
+    restTime()
+}
+setInterval(restTime, 1000)

@@ -1,195 +1,72 @@
 <!--
  * @Author: your name
- * @Date: 2020-02-27 22:19:11
- * @LastEditTime: 2020-09-18 23:43:04
+ * @Date: 2020-11-04 11:30:17
+ * @LastEditTime: 2020-11-04 13:39:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \专升本倒计时\index.html
- -->
+ * @FilePath: \blog\first.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="referrer" content="no-referrer">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <title>飞鹏考研服务中心</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .wrapper {
-            color: #000;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .wrapper h1 {
-            font-size: 20px;
-            color: red;
-            text-align: center;
-            margin: 20px;
-        }
-
-        .wrapper .time {
-            margin: 10px;
-            text-align: center;
-        }
-
-        .wrapper img {
-            width: 100%;
-        }
-
-        .wrapper .error {
-            font-size: 20px;
-            font-weight: bold;
-            color: #000;
-            margin-top: 10px;
-        }
-
-        .wrapper .error .DAY {
-            color: aquamarine;
-        }
-
-        .wrapper .name {
-            font-size: 20px;
-            margin-top: 10px;
-        }
-
-        #ad {
-            word-wrap: break-word：
-        }
-
-        .container {
-            width: 200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .container div {
-            margin-top: 10px;
-        }
-
-        .container .btn {
-            margin: 0 auto;
-            width: 50px;
-            height: 30px;
-            text-align: center;
-        }
-
-        .container input {
-            width: 200px;
-            height: 30px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .answer {
-            margin-left: 20px;
-            color: #f50;
-            text-align: left;
-            font-size: 20px;
-            font-weight: bold;
-            word-break: break-all;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逍遥圣君的博客</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <div class="wrapper">
-        <h1>全国考研倒计时</h1>
-        <div class="time">
-            <span>剩余</span>
-            <span class="day">day</span>
-            <span class="hour">hour</span>
-            <span class="minute">minute</span>
-            <span class="second">second</span>
-            <p class="error">
-                <span class="DAY"></span>后你会发现一个不同的自己
-            </p>
+    <div id="wrap">
+        <header>
+            <div id="dh">
+                <img src="images/logo.png" alt="">
+            </div>
+            <div id="menu">
+                <nav>
+                    <a href="#" class="selected">首页</a>
+                    <a href="CourseTable.html">课程表</a>
+                    <a href="book/index.html">飞鹏图书网</a>
+                    <!-- <a href="#">影视欣赏</a>
+                    <a href="#">乐曲欣赏</a>
+                    <a href="#">留言板</a>
+                    <a href="#">关于我</a> -->
+                </nav>
+            </div>
+        </header>
+        <div class="content">
+            <div id="left">
+                <h1>&gt;&gt;关于我</h1>
+                <div align="center"><img src="images/me.jpg" width="200" height="300" alt="" /></div>
+                <div class="time">
+                    <span>2022考研倒计时</span>
+                    <span>剩余</span>
+                    <span class="day">day</span>
+                    <span class="hour">hour</span>
+                    <span class="minute">minute</span>
+                    <span class="second">second</span>
+                </div>
+                <p align="center">
+                    <!-- <audio src="images/cj.mp3" autoplay="autoplay" loop="loop"></audio> -->
+                </p>
+            </div>
+            <!-- 右边 -->
+            <div id="right">
+                <div id="xiangce">
+                    <h2>>>相册</h2>
+                    <img src="images/5.jpg" width="215" height="200" alt="" /> 
+                    <img src="images/2.jpg" width="215" height="200" alt="" />
+                    <img src="images/3.jpg" width="215" height="200" alt="" />
+                    <img src="images/4.jpg" width="215" height="200" alt="" />
+                    <img src="images/1.jpg" width="215" height="200" alt="" />
+                    <img src="images/6.jpg" width="215" height="200" alt="" />
+                </div>
+            </div>
+            <div class="clr"></div>
         </div>
-        <p class="name">郑州西亚斯学院商学院
-            <span style="color:#f40;font-weight: bolder;">杨历朋</span>设计
-        </p>
+        <footer>版权归杨历朋所有&copy飞鹏集团;2020-2080</footer>
     </div>
-    <div class="container">
-        <div id="inputvalue">
-            <input type="text" placeholder="请输入值" class="inputvalue">
-        </div>
-        <div id="power">
-            <input type="text" placeholder="请输入幂" class="power">
-        </div>
-        <br>
-        <br>
-        <button class="btn">确定</button>
-    </div>
-    <div class="answer"></div>
-    <script>
-        var day = document.getElementsByClassName("day")[0]
-        var dayT = document.getElementsByClassName("DAY")[0]
-        var hour = document.getElementsByClassName("hour")[0]
-        var minute = document.getElementsByClassName("minute")[0]
-        var second = document.getElementsByClassName("second")[0]
-
-        function restTime() {
-            var setTime = new Date("2021/12/18 09:00:00");
-            var newTime = new Date();
-            var restSec = setTime.getTime() - newTime.getTime();
-            var dayt = parseInt(restSec / (60 * 60 * 24 * 1000));
-            var hourt = parseInt(restSec / (60 * 60 * 1000) % 24);
-            var minutet = parseInt(restSec / (60 * 1000) % 60);
-            var secondt = parseInt(restSec / 1000 % 60);
-
-            function gettimer() {
-                if (hourt < 10) {
-                    hourt = "0" + hourt
-                }
-                if (minutet < 10) {
-                    minutet = "0" + minutet
-                }
-                if (secondt < 10) {
-                    secondt = "0" + secondt
-                }
-            }
-            gettimer()
-            day.innerText = dayt + "天";
-            dayT.innerText = dayt + "天";
-            hour.innerText = hourt + "小时";
-            minute.innerText = minutet + "分钟";
-            second.innerText = secondt + "秒";
-
-        }
-        window.onload = function () {
-            restTime()
-        }
-        setInterval(restTime, 1000)
-        var btn = document.getElementsByClassName("btn")[0];
-        var answer = document.getElementsByClassName("answer")[0];
-
-        function getvalue() {
-            var inputvalue = document.getElementsByClassName("inputvalue")[0].value;
-            var power = document.getElementsByClassName("power")[0].value;
-            inputvalue = parseInt(inputvalue);
-            power = parseInt(power);
-            return {
-                inputvalue: inputvalue,
-                power: power
-            }
-        }
-        btn.onclick = function () {
-            var inputvalue = getvalue().inputvalue;
-            var power = getvalue().power;
-            var temp = inputvalue;
-            for (var i = 1; i < power; i++) {
-                inputvalue *= temp;
-            }
-            var num = new Number(inputvalue);
-            inputvalue = num.toLocaleString();
-            answer.innerHTML = "该数的幂为" +"<br>" + inputvalue;
-        }
-    </script>
+    <script src="index.js"></script>
 </body>
 
 </html>

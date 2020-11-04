@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>课程表</title>
     <style>
-        button{
+        body{background-color: #c7ae9a;}
+        button {
             width: 100px;
             height: 50px;
             font-size: 20px;
             color: aliceblue;
         }
-        #show{
-            width: 100%;
-            height: 50px;
-            margin-top: 10px;
-            font-size: 20px;
+        .index{
+            width: 200px;
+            margin: 0 auto;
+            text-align: center;  
+        }
+        a{
+            text-decoration: none;
+            font-size: 18px;
             color: #000;
-            text-align: center;
         }
     </style>
 </head>
+
 <body>
     <button>单周</button>
     <button style="float: right;">双周</button>
-    <div id="show"></div>
+    <div class="index"><a href="index.html">返回首页</a></div>
     <table border="2" bgcolor="yellow" align="center" height="400">
         <caption>大三单周课程表</caption>
         <tr>
@@ -158,6 +163,56 @@
             <td>第十节</td>
         </tr>
     </table>
-    <script src="index.js"></script>
+    <script>
+        (function () {
+            var frist = document.getElementsByTagName('table')[0];
+            var double = document.getElementsByTagName('table')[1];
+            var first_week = document.getElementsByTagName('button')[0];
+            var double_week = document.getElementsByTagName('button')[1];
+            // 点击函数
+            function Meclick() {
+                first_week.onclick = function () {
+                    oneWeek();
+                }
+                double_week.onclick = function () {
+                    twoWeek();
+                }
+            }
+            //时间函数
+            function restTime() {
+                var setTime = new Date("2020/9/7 00:00:00");
+                var newTime = new Date();
+                var restSec = newTime.getTime() - setTime.getTime();
+                var dayt = parseInt(restSec / (60 * 60 * 24 * 1000));
+                return dayt
+            }
+            // 执行函数
+            function start() {
+                var dayt = restTime();
+                if (Math.ceil(dayt / 7) % 2 == 1) {
+                    oneWeek()
+                } else {
+                    twoWeek()
+                }
+            }
+            start()
+            // 单双周函数
+            function oneWeek() {
+                double.style.display = "none";
+                frist.style.display = "table";
+                double_week.style.background = "#808080";
+                first_week.style.background = "#f40";
+            }
+
+            function twoWeek() {
+                double.style.display = "table";
+                frist.style.display = "none";
+                double_week.style.background = "#f40";
+                first_week.style.background = "#808080";
+            }
+            Meclick()
+        })()
+    </script>
 </body>
+
 </html>
