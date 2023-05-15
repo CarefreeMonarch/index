@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机点名</title>
+</head>
+<style>
+    .box {
+        width: 90%;
+        height: 570px;
+        margin: 40px auto;
+        background-color: blanchedalmond;
+        font-size: 22px;
+        text-align: center;
+        border-style: solid;
+        border-width: 10px;
+    }
+
+    h2,
+    .set {
+        line-height: 20px;
+    }
+
+    .firstname,
+    .lastname {
+        display: inline-block;
+        text-align: center;
+    }
+
+    .textbox {
+        border-color: aquamarine;
+        font-size: 20px;
+    }
+
+    button {
+        /* display: block; */
+        font-size: 20px;
+        font-family: "宋体";
+        text-align: center;
+        background-color:rgb(240, 204, 229);
+        padding: 8px 12% 8px 8%;
+        margin: 0 10px;
+        width: 100px;
+        height: 50px;
+        /* float: left; */
+        
+        /*line-height: 30px; */
+    }
+</style>
+
+<body>
+    <div class="box">
+        <h2 style="font-size: 15px;">点击start开始随机点名<br><br><br>点击stop结束随机点名</h2>
+        <p style="font-size: 18px; color:red">文本框输入内容请以中文逗号分开<br>例如：小明，小红</p>
+        <textarea rows="8" cols="25" value="" class="textbox"></textarea>
+        <h2 class="set">
+            <span class="firstname"></span><br><br>
+            <span class="lastname"></span>
+        </h2>
+        <button class="start" onclick="startimer()">start</button>
+        <button class="stoptime" onclick="stoptimer()">stop</button>
+    </div>
+    <script>
+        var firstname = document.getElementsByClassName("firstname")[0];
+        var lastname = document.getElementsByClassName("lastname")[0];
+        var textbox = document.getElementsByClassName("textbox")[0];;
+        var start = document.getElementsByClassName("start")[0];
+        var stoptime = document.getElementsByClassName("stoptime")[0];
+        var textboxvalue;
+        (function(){
+	        stoptime.disabled = true;
+        })() 
+        function getRandom(min, max) {
+            return Math.floor((Math.random() * (max - min + 1)) + min);
+        }
+        var timer;
+        function startimer() {
+            textboxvalue = textbox.value.split('，');
+            start.disabled = true;
+            stoptime.disabled = false;
+            firstname.innerHTML = "随机点名中......";
+            if (textboxvalue == "") {
+                textboxvalue = ["请输入内容"];
+                firstname.innerHTML = "";
+                playhaveNot();
+            }
+            textlength = textboxvalue.length - 1
+            timer = setInterval(function () {
+                var number = textboxvalue[getRandom(0, textlength)];
+                lastname.innerHTML = number;
+                var randomcolor = getRandom(0, 256);
+                var randomcolorg = getRandom(0, 256);
+                var randomcolorb = getRandom(0, 256);
+                var setcolor = "rgb" + "(" + randomcolor + "," + randomcolorg + "," + randomcolorb + ")";
+                lastname.style.color = setcolor;
+            }, 60);
+        }
+        function stoptimer() {
+            start.disabled = false;
+            stoptime.disabled = true;
+            clearInterval(timer);
+            if (textboxvalue == "请输入内容") {
+                firstname.innerHTML = "";
+                lastname.innerHTML = "";
+            } else {
+                firstname.innerHTML = "就是你了";
+                lastname.style.color = "red";
+                playhave();
+            }
+        }
+        if(!('speechSynthesis' in window)) {
+			throw alert("对不起，您的浏览器不支持")
+		}
+        function playhave() {
+            cancel();
+            cancel();
+            var to_speak = new SpeechSynthesisUtterance(firstname.innerHTML + lastname.innerHTML);
+            window.speechSynthesis.speak(to_speak);  
+        }
+        function playhaveNot() {
+            var to_speak = new SpeechSynthesisUtterance("请输入内容");
+            window.speechSynthesis.speak(to_speak);
+        }
+        function cancel() {
+            window.speechSynthesis.cancel();
+        }
+    </script>
+</body>
+</html>
