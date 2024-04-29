@@ -15,7 +15,7 @@ window.onclick=function(){
     audio.play();
 }
 function restTime() {
-    var setTime = new Date("2023/12/23 09:00:00");
+    var setTime = new Date("2024/12/21 09:00:00");
     var newTime = new Date();
     var restSec = setTime.getTime() - newTime.getTime();
     var dayt = parseInt(restSec / (60 * 60 * 24 * 1000));
